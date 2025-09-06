@@ -3,144 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - SynergySphere</title>
+    <title>Create an Account - SynergySphere</title>
     <link rel="stylesheet" href="main.css">
-    
     <script>
         (function() {
-            const theme = localStorage.getItem('theme') || 'light';
+            const theme = localStorage.getItem('theme') || 'dark';
             if (theme === 'dark') {
                 document.documentElement.classList.add('dark-mode-preload');
             }
         })();
     </script>
-    
-    <style>
-        body {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-    </style>
 </head>
-<body>
+<body class="page-layout">
 
     <header class="main-header">
         <div class="logo">SynergySphere</div>
         <nav class="user-nav">
-            <a href="#" class="link-box">Home</a>
-            <a href="#" class="link-box">Solutions</a>
-            <a href="#" class="link-box">Features</a>
-            <a href="index.html" class="link-box">Login</a>
-            
+            <div class="nav-links">
+                <a href="#" class="link-box">Home</a>
+                <a href="#" class="link-box">Solutions</a>
+                <a href="#" class="link-box">Features</a>
+                <a href="index.html" class="link-box">Login</a>
+            </div>
             <div class="theme-switch-wrapper">
                 <span class="theme-label" id="light-mode-label">Light</span>
-                <label class="theme-switch" for="theme-toggle">
-                    <input type="checkbox" id="theme-toggle" />
-                    <span class="slider"></span>
-                </label>
+                <label class="theme-switch" for="theme-toggle"><input type="checkbox" id="theme-toggle" /><span class="slider"></span></label>
                 <span class="theme-label" id="dark-mode-label">Dark</span>
             </div>
+            <button id="menu-toggle-btn" class="menu-toggle-btn">
+                <span></span><span></span><span></span>
+            </button>
         </nav>
     </header>
 
-    <main class="login-page-container">
-        <div class="card login-card-custom">
-            
+    <main class="auth-container">
+        <div class="auth-card">
             <h2>Create an account</h2>
-            <p class="signup-prompt">
+            <p class="auth-prompt">
                 Already have an account? <a href="index.html" class="text-link-button">Log in instead</a>
             </p>
-            
             <form id="signup-form">
                 <div class="input-group">
                     <label for="full-name">Name</label>
                     <input type="text" id="full-name" name="fullName" placeholder="Enter your full name" required>
                 </div>
-
                 <div class="input-group">
                     <label for="username">Set username</label>
                     <input type="text" id="username" name="username" placeholder="Choose a username" required>
                 </div>
-
                 <div class="input-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" placeholder="Enter your email" required>
                 </div>
-                
                 <div class="input-group">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" placeholder="Create a password" required>
                 </div>
-
                 <div class="input-group">
                     <label for="reenter-password">Re-enter password</label>
                     <input type="password" id="reenter-password" name="reenterPassword" placeholder="Confirm your password" required>
                 </div>
-
                 <div class="checkbox-group">
                     <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms">
-                        By creating an account, I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
-                    </label>
+                    <label for="terms">By creating an account, I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</label>
                 </div>
-                
-                <button type="submit" class="login-submit-button">Create an account</button>
+                <button type="submit" class="auth-submit-button">Create an account</button>
             </form>
         </div>
     </main>
 
     <footer class="main-footer">
-        <div>
-            <h4>Quick Links</h4>
-            <ul>
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">Tasks</a></li>
-            </ul>
-        </div>
-        <div>
-            <h4>Company</h4>
-            <ul>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </div>
-        <div>
-            <h4>Connect with us</h4>
-            <ul>
-                <li><a href="#">Twitter</a></li>
-                <li><a href="#">LinkedIn</a></li>
-                <li><a href="#">Facebook</a></li>
-            </ul>
-        </div>
+        <div><h4>Quick Links</h4><ul><li><a href="#">Dashboard</a></li><li><a href="#">Projects</a></li><li><a href="#">Tasks</a></li></ul></div>
+        <div><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li></ul></div>
+        <div><h4>Connect with us</h4><ul><li><a href="#">Twitter</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">Facebook</a></li></ul></div>
     </footer>
 
     <script src="main.js" defer></script>
-    
-    <script>
-        // Page-specific script for handling the sign-up form
-        document.addEventListener('DOMContentLoaded', () => {
-            const signupForm = document.getElementById('signup-form');
-
-            signupForm.addEventListener('submit', (event) => {
-                event.preventDefault();
-                // In a real application, you would collect all form data and send it to your server
-                console.log('Sign up form submitted!');
-                
-                if (window.showNotification) {
-                    window.showNotification('Account created successfully!', 'success');
-                } else {
-                    alert('Account created successfully!');
-                }
-                // Optionally, redirect to the login page after a short delay
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 2000);
-            });
-        });
-    </script>
 </body>
 </html>

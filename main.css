@@ -2,232 +2,116 @@
    1. CSS Variables & Global Styles
    ========================================================================== */
 :root {
-    --primary-color: #007aff;
-    --primary-hover-color: #0056b3;
-    --background-color: #f4f7f9; /* Light mode background */
-    --card-background-color: #ffffff; /* Light mode card/header background */
-    --text-color: #333333; /* Light mode text */
-    --border-color: #e0e0e0;
+    /* Light Theme Variables (Default) */
+    --primary-color: #3b82f6;
+    --background-color: #f1f5f9;
+    --card-background-color: #ffffff;
+    --header-footer-bg: #ffffff;
+    --text-color: #1e293b;
+    --subtle-text-color: #64748b;
+    --border-color: #e2e8f0;
+    --input-background: #f8fafc;
+    --auth-button-bg: #3b82f6;
+    --auth-button-text: #ffffff;
     --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Find and replace this rule in main.css */
+
+/* Dark Theme Overrides */
+body.dark-mode {
+    --background-color: #121212;      /* A very dark, near-black grey */
+    --card-background-color: #1E1E1E; /* A slightly lighter charcoal for cards */
+    --header-footer-bg: #1E1E1E;      /* Matching charcoal for header/footer */
+    --text-color: #EAEAEA;           /* Off-white text for readability */
+    --subtle-text-color: #A0A0A0;     /* Lighter grey for subtle text */
+    --border-color: #333333;         /* Grey for borders */
+    --input-background: #333333;     /* Matching grey for input backgrounds */
+    --auth-button-bg: #EAEAEA;       /* Light grey button */
+    --auth-button-text: #121212;      /* Dark text for the button */
 }
 
 body {
     font-family: var(--font-family);
     margin: 0;
-    background-color: var(--background-color); /* UPDATED */
-    color: var(--text-color); /* UPDATED */
-    line-height: 1.6;
+    background-color: var(--background-color);
+    color: var(--text-color);
     transition: background-color 0.3s ease, color 0.3s ease;
 }
+* { box-sizing: border-box; }
 
-* {
-    box-sizing: border-box;
+body.page-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* ==========================================================================
-   3. Specific Styles for Image-Based Login Page
+   2. Header, Footer & Common Components
    ========================================================================== */
-
 .main-header {
-    background-color: var(--card-background-color); /* UPDATED */
-    color: var(--text-color); /* UPDATED */
+    background-color: var(--header-footer-bg);
     padding: 15px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--border-color); /* UPDATED */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Added transition */
-}
-
-.main-header .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.main-header .user-nav {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.link-box {
-    padding: 8px 15px;
-    border-radius: 6px;
-    background-color: var(--background-color); /* UPDATED */
-    color: var(--text-color); /* UPDATED */
-    text-decoration: none;
-    border: 1px solid var(--border-color); /* UPDATED */
-    font-weight: 500;
-    transition: background-color 0.2s;
-}
-
-.link-box:hover {
-    background-color: var(--border-color); /* UPDATED */
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
     color: var(--text-color);
 }
-
-.login-page-container {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--background-color); /* UPDATED */
-    padding: 20px;
-}
-
-.login-card-custom {
-    background-color: var(--card-background-color); /* UPDATED */
-    padding: 50px 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    max-width: 450px;
-    width: 100%;
-    text-align: center;
-    color: var(--text-color); /* UPDATED */
-    border: 1px solid var(--border-color); /* UPDATED */
-}
-
-.login-card-custom h2 {
-    font-size: 2.2rem;
-    margin-bottom: 5px;
-    color: var(--text-color); /* UPDATED */
-}
-
-.login-card-custom .signup-prompt {
-    font-size: 1.1rem;
-    color: #888; /* Keeping a subtle color here */
-    margin-bottom: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.text-link-button {
-    background: none;
-    border: none;
-    color: var(--primary-color);
-    font-size: 1.1rem;
-    cursor: pointer;
-    padding: 0;
-    text-decoration: none;
-    margin-left: 8px;
-}
-
-.text-link-button:hover {
-    text-decoration: underline;
-}
-
-.login-submit-button {
-    background-color: #D3D3D3;
-    color: #333;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 25px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 30px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    transition: background-color 0.3s ease;
-}
-
-.login-submit-button:hover {
-    background-color: #9ab1f9;
-}
-
-.main-footer {
-    background-color: var(--card-background-color); /* UPDATED */
-    color: #888; /* UPDATED */
-    padding: 40px 20px;
-    border-top: 1px solid var(--border-color); /* UPDATED */
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    font-size: 0.9rem;
-}
-
-.main-footer div { margin: 10px 20px; min-width: 150px; }
-.main-footer h4 { color: var(--text-color); margin-bottom: 15px; } /* UPDATED */
+.logo { font-size: 1.5rem; font-weight: bold; }
+.user-nav { display: flex; align-items: center; gap: 10px; }
+.link-box { padding: 8px 15px; border-radius: 6px; text-decoration: none; font-weight: 500; transition: color 0.2s, background-color 0.2s; color: var(--text-color); }
+.link-box:hover { background-color: var(--background-color); }
+.main-footer { background-color: var(--header-footer-bg); color: var(--subtle-text-color); padding: 40px 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; flex-wrap: wrap; }
+.main-footer h4 { color: var(--text-color); }
 .main-footer ul { list-style: none; padding: 0; }
 .main-footer ul li { margin-bottom: 8px; }
-.main-footer ul li a { color: #888; text-decoration: none; } /* UPDATED */
-.main-footer ul li a:hover { text-decoration: underline; }
+.main-footer ul li a { color: var(--subtle-text-color); text-decoration: none; }
 
 /* ==========================================================================
-   4. Dark Mode Theme & Toggle Switch
+   3. Auth Page Styles (Login/Signup)
    ========================================================================== */
+.auth-container { flex-grow: 1; width: 100%; display: flex; justify-content: center; align-items: center; padding: 40px 20px; }
+.auth-card { background-color: var(--card-background-color); padding: 48px; border-radius: 16px; max-width: 480px; width: 100%; text-align: center; border: 1px solid var(--border-color); }
+.auth-card h2 { font-size: 2.25rem; font-weight: bold; margin: 0 0 12px 0; }
+.auth-card .auth-prompt { font-size: 1rem; color: var(--subtle-text-color); margin-bottom: 32px; }
+.input-group { margin-bottom: 16px; text-align: left; }
+.input-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-color); }
+.input-group input { width: 100%; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 1rem; background-color: var(--input-background); color: var(--text-color); }
+.auth-submit-button { background-color: var(--auth-button-bg); color: var(--auth-button-text); font-weight: bold; border: none; padding: 14px; border-radius: 8px; font-size: 1rem; cursor: pointer; width: 100%; margin-top: 24px; transition: background-color 0.2s ease; }
+.auth-submit-button:hover { background-color: var(--primary-color); color: white; }
+.text-link-button { color: var(--primary-color); font-weight: 500; text-decoration: none; cursor: pointer; }
+.checkbox-group { display: flex; align-items: center; text-align: left; font-size: 0.8rem; color: var(--subtle-text-color); margin-top: 24px; }
+.checkbox-group input[type="checkbox"] { margin-right: 8px; width: auto; flex-shrink: 0; }
+.checkbox-group a { color: var(--primary-color); }
 
-html.dark-mode-preload,
-body.dark-mode {
-    --background-color: #1a1a1a; /* Dark mode background */
-    --card-background-color: #282828; /* Dark mode card/header */
-    --text-color: #e0e0e0; /* Dark mode text */
-    --border-color: #3a3a3a;
-    --primary-hover-color: #3395ff;
-}
-
-/* Styles for toggle switch remain the same */
-.theme-switch-wrapper {
-    display: flex;
-    align-items: center;
-    margin-left: 15px;
-}
-
-.theme-switch {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 26px;
-}
-
+/* ==========================================================================
+   4. Theme Toggle
+   ========================================================================== */
+.theme-switch-wrapper { display: flex; align-items: center; margin-left: 15px; }
+.theme-label { font-size: 0.8rem; font-weight: 500; color: var(--subtle-text-color); margin: 0 8px; }
+.theme-label.active { color: var(--text-color); font-weight: bold; }
+.theme-switch { position: relative; display: inline-block; width: 50px; height: 26px; }
 .theme-switch input { opacity: 0; width: 0; height: 0; }
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-    border-radius: 34px;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 20px; width: 20px;
-    left: 3px; bottom: 3px;
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
-}
-
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
+.slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
 input:checked + .slider { background-color: var(--primary-color); }
 input:checked + .slider:before { transform: translateX(24px); }
 
-/* Find this rule: */
-.input-group input {
-    width: 100%;
-    padding: 14px 15px;
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    font-size: 16px;
-    background-color: var(--background-color); /* UPDATED: Use theme background */
-    color: var(--text-color); /* UPDATED: Use theme text color */
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; /* Added color transition */
-}
-
-/* Base style for the "Light" and "Dark" text labels */
-.theme-label {
-    font-size: 0.8rem; /* Makes the text small */
-    font-weight: 500;
-    color: #888; /* A neutral, dimmer color for the inactive label */
-    margin: 0 8px; /* Adds space around the labels */
-    transition: color 0.3s ease;
-}
-
-/* Style for the currently active theme label */
-.theme-label.active {
-    color: var(--text-color); /* Uses the theme's main text color to make it prominent */
-    font-weight: bold;
+/* ==========================================================================
+   5. Responsive Styles
+   ========================================================================== */
+.menu-toggle-btn { display: none; }
+@media (max-width: 850px) {
+    .nav-links, .theme-label { display: none; }
+    .main-header { padding: 15px 20px; }
+    .menu-toggle-btn { display: flex; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; background: transparent; border: none; cursor: pointer; padding: 0; margin-left: 15px; }
+    .menu-toggle-btn span { width: 100%; height: 3px; background-color: var(--text-color); border-radius: 2px; }
+    .user-nav.mobile-active .nav-links { display: flex; flex-direction: column; gap: 10px; position: absolute; top: 100%; left: 0; right: 0; background-color: var(--header-footer-bg); padding: 20px; border-bottom: 1px solid var(--border-color); box-shadow: 0 8px 16px rgba(0,0,0,0.1); z-index: 100; }
+    .user-nav.mobile-active .link-box { text-align: center; width: 100%; }
+    .auth-container { padding: 20px; align-items: flex-start; }
+    .auth-card { padding: 32px 24px; }
+    .auth-card h2 { font-size: 1.8rem; }
+    .main-footer { flex-direction: column; text-align: center; gap: 20px; }
 }
