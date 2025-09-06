@@ -14,20 +14,27 @@
     })();
   </script>
   <style>
-    html {
-      scroll-behavior: smooth; /* Enables smooth scrolling */
-    }
+    html { scroll-behavior: smooth; }
   </style>
 </head>
 <body class="page-layout">
 
   <!-- Header -->
   <header class="main-header">
-    <div class="logo"><b>SynergySphere</b></div>
+    <div class="logo">SynergySphere</div>
     <nav class="user-nav">
       <a href="index.html" class="link-box active">Home</a>
       <a href="#features" class="link-box">Features</a>
       <a href="#contact" class="link-box">Contact</a>
+      <!-- Theme toggle -->
+      <div class="theme-switch-wrapper">
+        <span class="theme-label" id="light-mode-label">Light</span>
+        <label class="theme-switch" for="theme-toggle">
+          <input type="checkbox" id="theme-toggle" />
+          <span class="slider"></span>
+        </label>
+        <span class="theme-label" id="dark-mode-label">Dark</span>
+      </div>
     </nav>
     <button id="menu-toggle-btn" class="menu-toggle-btn">
       <span></span><span></span><span></span>
@@ -101,4 +108,3 @@
   <script src="main.js" defer></script>
 </body>
 </html>
-
