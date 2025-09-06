@@ -2,116 +2,760 @@
    1. CSS Variables & Global Styles
    ========================================================================== */
 :root {
-    /* Light Theme Variables (Default) */
     --primary-color: #3b82f6;
     --background-color: #f1f5f9;
     --card-background-color: #ffffff;
-    --header-footer-bg: #ffffff;
+    --header-footer-bg: #ffffff; /* Used for login/signup header/footer */
+    --sidebar-bg: #ffffff;
     --text-color: #1e293b;
     --subtle-text-color: #64748b;
     --border-color: #e2e8f0;
     --input-background: #f8fafc;
-    --auth-button-bg: #3b82f6;
-    --auth-button-text: #ffffff;
+    --shadow-color: rgba(100, 100, 111, 0.15) 0px 7px 29px 0px;
     --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* Find and replace this rule in main.css */
-
-/* Dark Theme Overrides */
 body.dark-mode {
-    --background-color: #121212;      /* A very dark, near-black grey */
-    --card-background-color: #1E1E1E; /* A slightly lighter charcoal for cards */
-    --header-footer-bg: #1E1E1E;      /* Matching charcoal for header/footer */
-    --text-color: #EAEAEA;           /* Off-white text for readability */
-    --subtle-text-color: #A0A0A0;     /* Lighter grey for subtle text */
-    --border-color: #333333;         /* Grey for borders */
-    --input-background: #333333;     /* Matching grey for input backgrounds */
-    --auth-button-bg: #EAEAEA;       /* Light grey button */
-    --auth-button-text: #121212;      /* Dark text for the button */
+    --background-color: #121212;
+    --card-background-color: #1E1E1E;
+    --header-footer-bg: #1E1E1E; /* Used for login/signup header/footer */
+    --sidebar-bg: #1E1E1E;
+    --text-color: #EAEAEA;
+    --subtle-text-color: #A0A0A0;
+    --border-color: #333333;
+    --input-background: #333333;
+    --auth-button-bg: #EAEAEA; /* For login/signup button */
+    --auth-button-text: #121212; /* For login/signup button text */
 }
 
-body {
-    font-family: var(--font-family);
-    margin: 0;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
+body { font-family: var(--font-family); margin: 0; background-color: var(--background-color); color: var(--text-color); }
 * { box-sizing: border-box; }
 
-body.page-layout {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
+/* ==========================================================================
+   2. General Layouts (Auth vs. App)
+   ========================================================================== */
+/* For Login/Signup pages */
+body.page-layout { min-height: 100vh; display: flex; flex-direction: column; }
+.page-layout main { flex-grow: 1; } /* Ensure main content pushes footer down */
+
+/* For Project Dashboard page */
+.app-layout { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; transition: grid-template-columns 0.3s ease; }
+.app-layout .main-content { display: flex; flex-direction: column; }
+.app-layout .content-area { flex-grow: 1; padding: 30px; }
+
 
 /* ==========================================================================
-   2. Header, Footer & Common Components
+   3. Common Components (Headers, Footers, Buttons) - Used for Login/Signup
    ========================================================================== */
-.main-header {
-    background-color: var(--header-footer-bg);
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--border-color);
-    position: relative;
-    color: var(--text-color);
+.main-header { /* For login/signup pages */
+    background-color: var(--header-footer-bg); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); position: relative;
 }
-.logo { font-size: 1.5rem; font-weight: bold; }
-.user-nav { display: flex; align-items: center; gap: 10px; }
-.link-box { padding: 8px 15px; border-radius: 6px; text-decoration: none; font-weight: 500; transition: color 0.2s, background-color 0.2s; color: var(--text-color); }
+/* .logo style is shared */
+.user-nav { display: flex; align-items: center; gap: 10px; } /* For login/signup pages */
+.link-box { /* For login/signup pages */
+    padding: 8px 15px; border-radius: 6px; text-decoration: none; font-weight: 500; transition: color 0.2s, background-color 0.2s; color: var(--text-color);
+}
 .link-box:hover { background-color: var(--background-color); }
-.main-footer { background-color: var(--header-footer-bg); color: var(--subtle-text-color); padding: 40px 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; flex-wrap: wrap; }
+.link-box.active { background-color: var(--primary-color); color: white; } /* Highlight for active link */
+
+.main-footer { /* For login/signup pages */
+    background-color: var(--header-footer-bg); color: var(--subtle-text-color); padding: 40px 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; flex-wrap: wrap;
+}
 .main-footer h4 { color: var(--text-color); }
 .main-footer ul { list-style: none; padding: 0; }
-.main-footer ul li { margin-bottom: 8px; }
 .main-footer ul li a { color: var(--subtle-text-color); text-decoration: none; }
 
 /* ==========================================================================
-   3. Auth Page Styles (Login/Signup)
+   4. Auth Page Styles (Login/Signup)
    ========================================================================== */
-.auth-container { flex-grow: 1; width: 100%; display: flex; justify-content: center; align-items: center; padding: 40px 20px; }
+.auth-container { flex-grow: 1; display: flex; justify-content: center; align-items: center; padding: 40px 20px; }
 .auth-card { background-color: var(--card-background-color); padding: 48px; border-radius: 16px; max-width: 480px; width: 100%; text-align: center; border: 1px solid var(--border-color); }
 .auth-card h2 { font-size: 2.25rem; font-weight: bold; margin: 0 0 12px 0; }
 .auth-card .auth-prompt { font-size: 1rem; color: var(--subtle-text-color); margin-bottom: 32px; }
 .input-group { margin-bottom: 16px; text-align: left; }
-.input-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-color); }
+.input-group label { display: block; margin-bottom: 8px; font-weight: 600; }
 .input-group input { width: 100%; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 1rem; background-color: var(--input-background); color: var(--text-color); }
-.auth-submit-button { background-color: var(--auth-button-bg); color: var(--auth-button-text); font-weight: bold; border: none; padding: 14px; border-radius: 8px; font-size: 1rem; cursor: pointer; width: 100%; margin-top: 24px; transition: background-color 0.2s ease; }
+.auth-submit-button { background-color: var(--auth-button-bg, #e2e8f0); color: var(--auth-button-text, #1e293b); font-weight: bold; border: none; padding: 14px; border-radius: 8px; font-size: 1rem; cursor: pointer; width: 100%; margin-top: 24px; transition: background-color 0.2s ease; }
 .auth-submit-button:hover { background-color: var(--primary-color); color: white; }
 .text-link-button { color: var(--primary-color); font-weight: 500; text-decoration: none; cursor: pointer; }
 .checkbox-group { display: flex; align-items: center; text-align: left; font-size: 0.8rem; color: var(--subtle-text-color); margin-top: 24px; }
-.checkbox-group input[type="checkbox"] { margin-right: 8px; width: auto; flex-shrink: 0; }
-.checkbox-group a { color: var(--primary-color); }
+
 
 /* ==========================================================================
-   4. Theme Toggle
+   5. App Page Styles (Project Dashboard Sidebar)
    ========================================================================== */
-.theme-switch-wrapper { display: flex; align-items: center; margin-left: 15px; }
-.theme-label { font-size: 0.8rem; font-weight: 500; color: var(--subtle-text-color); margin: 0 8px; }
-.theme-label.active { color: var(--text-color); font-weight: bold; }
+.sidebar {
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    overflow-x: hidden; /* Hide content when collapsed */
+}
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.sidebar-toggle { /* Desktop toggle button in sidebar */
+    background: none; border: none; color: var(--text-color); font-size: 1.5rem; cursor: pointer;
+    line-height: 1; /* Align button text */
+}
+
+/* Sidebar search */
+.sidebar-search { margin-bottom: 20px; }
+.sidebar-search input[type="search"] {
+    width: 100%; padding: 10px 15px; border-radius: 8px; border: 1px solid var(--border-color);
+    background-color: var(--input-background); color: var(--text-color);
+}
+
+/* Sidebar navigation links */
+.sidebar-nav { flex-grow: 1; } /* Push footer to bottom */
+.sidebar-nav .nav-link {
+    display: flex; align-items: center; gap: 15px; padding: 12px; margin-bottom: 5px;
+    border-radius: 8px; text-decoration: none; color: var(--subtle-text-color); font-weight: 500;
+    position: relative; /* For notification count */
+}
+.sidebar-nav .nav-link:hover { background-color: var(--background-color); }
+.sidebar-nav .nav-link.active { background-color: var(--primary-color); color: white; }
+.nav-icon { font-size: 1.2rem; } /* Ensure icons are visible */
+
+/* Sidebar footer (Theme toggle and User Profile) */
+.sidebar-footer { margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border-color); }
+.sidebar-footer .theme-switch-wrapper { margin-bottom: 20px; justify-content: space-between; } /* Align switch and labels */
+.user-profile { display: flex; align-items: center; gap: 10px; }
+.user-profile img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+.user-info { display: flex; flex-direction: column; }
+.user-name { font-weight: bold; }
+.user-email { font-size: 0.8rem; color: var(--subtle-text-color); }
+
+/* Sidebar collapsed state */
+.app-layout.sidebar-collapsed { grid-template-columns: 80px 1fr; }
+.app-layout.sidebar-collapsed .sidebar .nav-text,
+.app-layout.sidebar-collapsed .sidebar .user-info,
+.app-layout.sidebar-collapsed .sidebar .logo,
+.app-layout.sidebar-collapsed .sidebar-search,
+.app-layout.sidebar-collapsed .theme-label {
+    display: none;
+}
+.app-layout.sidebar-collapsed .sidebar-toggle { transform: rotate(180deg); } /* Rotate arrow */
+.app-layout.sidebar-collapsed .sidebar-header { justify-content: center; } /* Center toggle */
+.app-layout.sidebar-collapsed .sidebar-nav .nav-link { justify-content: center; } /* Center icons */
+.app-layout.sidebar-collapsed .sidebar-footer { align-items: center; } /* Center footer items */
+
+
+/* --- Main Content Area (for Projects) --- */
+.app-header { /* Only for mobile sidebar toggle */
+    display: none; /* Hidden by default on desktop for app-layout */
+    justify-content: flex-start; /* Align toggle to left on mobile */
+    align-items: center; padding: 15px; border-bottom: 1px solid var(--border-color);
+}
+.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+.page-header h1 { margin: 0; font-size: 2rem; }
+.btn-primary { background-color: var(--primary-color); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 500; }
+
+/* --- Project Card & Grid (Styles are mostly unchanged) --- */
+.project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+.project-card { background-color: var(--card-background-color); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; box-shadow: var(--shadow-color); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.project-card:hover { transform: translateY(-5px); }
+.project-card .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+.project-card .card-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.project-card .tag { font-size: 0.75rem; font-weight: 500; padding: 4px 8px; border-radius: 6px; color: #333; }
+.project-card .options-btn { background: none; border: none; font-size: 1.5rem; line-height: 1; cursor: pointer; color: var(--text-color); }
+.project-card .project-title { font-size: 1.25rem; margin: 0 0 15px 0; }
+.project-card .project-image { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
+.project-card .card-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--subtle-text-color); }
+.card-footer .deadline, .card-footer .team-info { display: flex; align-items: center; gap: 8px; }
+.card-footer .manager-avatar { width: 30px; height: 30px; border-radius: 50%; }
+
+/* ==========================================================================
+   6. Theme Toggle & Notifications
+   ========================================================================== */
+.theme-switch-wrapper { display: flex; align-items: center; } /* Used in sidebar footer now */
 .theme-switch { position: relative; display: inline-block; width: 50px; height: 26px; }
 .theme-switch input { opacity: 0; width: 0; height: 0; }
 .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
 .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
 input:checked + .slider { background-color: var(--primary-color); }
 input:checked + .slider:before { transform: translateX(24px); }
+.theme-label { font-size: 0.8rem; font-weight: 500; color: var(--subtle-text-color); margin: 0 8px; }
+.theme-label.active { color: var(--text-color); font-weight: bold; }
+
+/* Notifications inside sidebar */
+.notification-link { /* Wrapper for the whole notification entry */
+    position: relative;
+}
+.notification-link .notification-count { /* Badge on the notification link */
+    position: absolute; top: 8px; right: 8px; background-color: #ef4444; color: white;
+    width: 18px; height: 18px; border-radius: 50%; font-size: 0.7rem; display: flex;
+    justify-content: center; align-items: center;
+}
+
+.dropdown-panel {
+    display: none;
+    position: fixed; /* Changed to fixed for reliable positioning */
+    background-color: var(--card-background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: var(--shadow-color);
+    width: 300px;
+    z-index: 1000; /* Ensure it appears on top of other content */
+}
+.dropdown-panel.show {
+    display: block;
+}
+.notification-item { padding: 12px 15px; border-bottom: 1px solid var(--border-color); font-size: 0.9rem; }
+.notification-item:last-child { border-bottom: none; }
+.notification-item.unread { font-weight: bold; }
 
 /* ==========================================================================
-   5. Responsive Styles
+   7. Responsive Styles
    ========================================================================== */
-.menu-toggle-btn { display: none; }
+.menu-toggle-btn { /* Mobile toggle button for app-header */
+    display: none; /* Hidden by default on desktop */
+    flex-direction: column; justify-content: space-around; width: 30px; height: 25px;
+    background: transparent; border: none; cursor: pointer; padding: 0;
+}
+.menu-toggle-btn span { width: 100%; height: 3px; background-color: var(--text-color); border-radius: 2px; }
+
+
 @media (max-width: 850px) {
-    .nav-links, .theme-label { display: none; }
-    .main-header { padding: 15px 20px; }
-    .menu-toggle-btn { display: flex; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; background: transparent; border: none; cursor: pointer; padding: 0; margin-left: 15px; }
-    .menu-toggle-btn span { width: 100%; height: 3px; background-color: var(--text-color); border-radius: 2px; }
-    .user-nav.mobile-active .nav-links { display: flex; flex-direction: column; gap: 10px; position: absolute; top: 100%; left: 0; right: 0; background-color: var(--header-footer-bg); padding: 20px; border-bottom: 1px solid var(--border-color); box-shadow: 0 8px 16px rgba(0,0,0,0.1); z-index: 100; }
-    .user-nav.mobile-active .link-box { text-align: center; width: 100%; }
+    /* --- Login/Signup Page Mobile Styles (Still relevant for auth pages) --- */
+    .page-layout .nav-links, .page-layout .theme-label { display: none; }
+    .page-layout .main-header .menu-toggle-btn { display: flex; margin-left: auto; } /* Ensure mobile toggle is visible */
+    .page-layout .user-nav.mobile-active .nav-links {
+        display: flex; flex-direction: column; gap: 10px; position: absolute; top: 100%; left: 0; right: 0;
+        background-color: var(--header-footer-bg); padding: 20px; border-bottom: 1px solid var(--border-color);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1); z-index: 100;
+    }
+    .page-layout .user-nav.mobile-active .link-box { text-align: center; width: 100%; }
     .auth-container { padding: 20px; align-items: flex-start; }
     .auth-card { padding: 32px 24px; }
     .auth-card h2 { font-size: 1.8rem; }
     .main-footer { flex-direction: column; text-align: center; gap: 20px; }
+
+
+    /* --- Project Dashboard Mobile Styles --- */
+    .app-layout { grid-template-columns: 1fr; } /* Stack sidebar and main content */
+    .sidebar {
+        position: fixed; left: -100%; top: 0; height: 100%; z-index: 1000; width: 280px;
+        transition: left 0.3s ease; box-shadow: var(--shadow-color); /* Add shadow for mobile drawer */
+    }
+    .app-layout.sidebar-mobile-active .sidebar { left: 0; } /* Show sidebar when active */
+    #sidebar-toggle-desktop { display: none; } /* Hide desktop toggle on mobile */
+
+    .app-header { /* Show mobile header with toggle */
+        display: flex; background-color: var(--header-footer-bg); /* Use header-footer color for consistency */
+    }
+    .app-layout .menu-toggle-btn { display: flex; } /* Show mobile hamburger icon */
+    .content-area { padding: 20px; } /* Adjust padding */
+    .page-header { flex-direction: column; align-items: flex-start; gap: 15px; } /* Stack header elements */
+
+    .dropdown-panel { /* Reposition notification dropdown for mobile sidebar */
+        position: fixed; /* Keep it in viewport */
+        left: 290px; /* Offset from sidebar */
+        top: 20px; /* Position from top */
+        right: auto; /* Remove right constraint */
+        width: calc(100vw - 310px); /* Fill remaining width, with padding */
+        max-width: 300px; /* Max width */
+    }
+    .app-layout.sidebar-collapsed .dropdown-panel { /* Should not happen with mobile, but good for safety */
+        left: 90px;
+    }
+}
+
+/* ==========================================================================
+   6. Dashboard Page Styles
+   ========================================================================== */
+.dashboard-nav {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.dashboard-tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--subtle-text-color);
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px; /* Aligns border with nav bottom border */
+}
+.dashboard-tab.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+.tab-pane {
+    display: none;
+}
+.tab-pane.active {
+    display: block;
+}
+.activity-card {
+    background-color: var(--card-background-color);
+    border-radius: 8px;
+    padding: 24px 32px;
+    box-shadow: var(--shadow-color);
+}
+.activity-card h3 {
+    margin: 0 0 20px 0;
+}
+.activity-list .activity-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+.activity-list .activity-item:first-child {
+    padding-top: 0;
+}
+.activity-list .activity-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+@media (max-width: 600px) {
+    .activity-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
+/* ==========================================================================
+   7. Friends & Chat Styles
+   ========================================================================== */
+.friends-layout {
+    display: flex;
+    gap: 20px;
+    height: 60vh; /* Set a fixed height for the layout */
+}
+.friends-list {
+    flex-basis: 30%;
+    min-width: 200px;
+    background-color: var(--card-background-color);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: var(--shadow-color);
+}
+.friends-list h4 {
+    margin: 0 0 15px 0;
+}
+.friends-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.friend-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    font-weight: 500;
+}
+.friend-item:hover {
+    background-color: var(--background-color);
+}
+.friend-item.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--subtle-text-color);
+    margin-right: 12px;
+}
+.status-dot.online {
+    background-color: #2ecc71; /* Green for online */
+}
+
+.chat-box {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--card-background-color);
+    border-radius: 8px;
+    box-shadow: var(--shadow-color);
+    overflow: hidden; /* Clips the children to the rounded corners */
+}
+.chat-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+.chat-header h5 {
+    margin: 0;
+    font-size: 1.1em;
+}
+.chat-messages {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.message {
+    padding: 10px 15px;
+    border-radius: 18px;
+    max-width: 70%;
+}
+.message.received {
+    background-color: var(--background-color);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
+.message.sent {
+    background-color: var(--primary-color);
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
+.chat-input {
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid var(--border-color);
+    gap: 10px;
+}
+.chat-input input {
+    flex-grow: 1;
+}
+.chat-input button {
+    white-space: nowrap; /* Prevents "Send" from wrapping */
+}
+
+/* Responsive adjustments for the friends/chat layout */
+@media (max-width: 768px) {
+    .friends-layout {
+        flex-direction: column;
+        height: auto;
+    }
+}
+
+/* ==========================================================================
+   8. Tasks Completed Styles
+   ========================================================================== */
+.completed-tasks-list {
+    display: flex;
+    flex-direction: column;
+}
+.task-item {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+.task-item:first-child {
+    padding-top: 0;
+}
+.task-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.task-header h4 {
+    margin: 0;
+    font-size: 1.1em;
+    color: var(--text-color);
+}
+.task-date {
+    font-size: 0.85em;
+    color: var(--subtle-text-color);
+}
+.task-details p {
+    margin: 4px 0 0 0;
+    font-size: 0.9em;
+    color: var(--subtle-text-color);
+}
+.task-details p strong {
+    color: var(--text-color);
+}
+@media (max-width: 600px) {
+    .task-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+}
+
+/* ==========================================================================
+   9. Contribution Pie Chart Styles
+   ========================================================================== */
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+.task-info {
+    flex-grow: 1;
+}
+.task-chart {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    flex-shrink: 0; /* Prevents the chart from shrinking */
+}
+
+/* Contribution classes using conic-gradient.
+  --primary-color is your contribution, --border-color is the team's.
+*/
+.contribution-25 {
+    background-image: conic-gradient(var(--primary-color) 90deg, var(--border-color) 90deg);
+}
+.contribution-33 {
+    background-image: conic-gradient(var(--primary-color) 120deg, var(--border-color) 120deg);
+}
+.contribution-50 {
+    background-image: conic-gradient(var(--primary-color) 180deg, var(--border-color) 180deg);
+}
+.contribution-75 {
+    background-image: conic-gradient(var(--primary-color) 270deg, var(--border-color) 270deg);
+}
+
+/* ==========================================================================
+   10. Task Page Pie Chart
+   ========================================================================== */
+.contribution-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+.contribution-section h3 {
+    margin-top: 0;
+}
+.task-chart-small {
+    width: 120px; /* Making the chart a bit smaller for this page */
+    height: 120px;
+    /* This gradient creates the 3-slice pie chart for this task */
+    background-image: conic-gradient(
+        #3b82f6 0deg 180deg,     /* You (50%) - Blue */
+        #ef4444 180deg 270deg,   /* Maria (25%) - Red */
+        #f59e0b 270deg 360deg    /* Chen (25%) - Amber */
+    );
+}
+
+/* Re-using chart-container and legend styles from dashboard, but adding new colors */
+.legend-swatch.chen { background-color: #f59e0b; }
+
+/* Making team avatars overlap */
+.team-avatars img {
+    margin-left: -10px;
+}
+.team-avatars img:first-child {
+    margin-left: 0;
+}
+
+/* ==========================================================================
+   8. Task Detail Page Styles
+   ========================================================================== */
+.task-detail-card {
+    background-color: var(--card-background-color);
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-color);
+}
+.task-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+.task-detail-header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+.task-status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+.status-progress {
+    background-color: #fef3c7;
+    color: #ca8a04;
+}
+body.dark-mode .status-progress {
+    background-color: #423d22;
+    color: #fef08a;
+}
+.task-description h3 {
+    margin-top: 0;
+}
+.task-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    background-color: var(--background-color);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 30px 0;
+}
+.meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.meta-item strong {
+    color: var(--subtle-text-color);
+    font-size: 0.9em;
+}
+.team-avatars {
+    display: flex;
+}
+.team-avatars img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: -10px; /* Overlap effect */
+    border: 2px solid var(--card-background-color);
+}
+.task-breakdown {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+.task-list h3 {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+.task-checklist {
+    list-style: none;
+    padding: 0;
+}
+.task-checklist li {
+    padding: 10px 0 10px 30px;
+    position: relative;
+}
+.task-checklist li::before {
+    content: '';
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--subtle-text-color);
+    border-radius: 4px;
+    position: absolute;
+    left: 0;
+    top: 12px;
+}
+.task-checklist li.completed::before {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.task-checklist li.completed::after {
+    content: '✔';
+    color: white;
+    position: absolute;
+    left: 4px;
+    top: 10px;
+    font-size: 12px;
+}
+
+@media (max-width: 768px) {
+    .task-detail-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .task-breakdown {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   11. Task Page - Two-Column Layout & Activity Feed
+   ========================================================================== */
+.task-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* 2/3 for main info, 1/3 for activity */
+    gap: 40px;
+    margin-top: 20px;
+}
+.task-sidebar-column h3 {
+    margin-top: 0;
+}
+.activity-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.feed-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    font-size: 0.9em;
+}
+.feed-item img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-top: 3px;
+}
+.feed-item p {
+    margin: 0;
+    line-height: 1.5;
+}
+.feed-time {
+    color: var(--subtle-text-color);
+    font-size: 0.9em;
+}
+.comment-form {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+.comment-form textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: inherit;
+    margin-bottom: 10px;
+    resize: vertical;
+}
+.comment-form button {
+    width: 100%;
+}
+
+/* Responsive adjustments for the new layout */
+@media (max-width: 1024px) {
+    .task-layout {
+        grid-template-columns: 1fr; /* Stack columns on tablets and smaller */
+    }
+}
+
+/* ==========================================================================
+   13. Chart Layout Update
+   ========================================================================== */
+.chart-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 25px; /* Space between chart and legend */
+    padding-top: 15px;
+}
+
+/* We are removing the old .chart-container styles, as .chart-wrapper replaces it */
+.chart-container {
+   padding-top: 0; /* Reset padding if this class is still used elsewhere */
+}
+
+/* Responsive adjustments for the chart wrapper */
+@media (max-width: 600px) {
+    .chart-wrapper {
+        flex-direction: column; /* Stack chart and legend on small screens */
+        align-items: flex-start;
+        gap: 15px;
+    }
 }

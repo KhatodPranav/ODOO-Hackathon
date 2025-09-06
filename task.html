@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Details - SynergySphere</title>
+    <link rel="stylesheet" href="main.css">
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme') || 'dark';
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark-mode-preload');
+            }
+        })();
+    </script>
+</head>
+<body class="app-layout">
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">SynergySphere</div>
+            <button id="sidebar-toggle-desktop" class="sidebar-toggle">‹</button>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-link">
+                <span class="nav-icon">📊</span> <span class="nav-text">Dashboard</span>
+            </a>
+            <a href="project.html" class="nav-link">
+                <span class="nav-icon">📁</span> <span class="nav-text">Projects</span>
+            </a>
+            <a href="task.html" class="nav-link active">
+                <span class="nav-icon">✅</span> <span class="nav-text">Tasks</span>
+            </a>
+            <a href="#" class="nav-link notification-link" id="notification-link">
+                <span class="nav-icon">🔔</span> <span class="nav-text">Notifications</span>
+                <span class="notification-count">3</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+             <div class="theme-switch-wrapper">
+                <span class="theme-label" id="light-mode-label">Light</span>
+                <label class="theme-switch" for="theme-toggle"><input type="checkbox" id="theme-toggle" /><span class="slider"></span></label>
+                <span class="theme-label" id="dark-mode-label">Dark</span>
+            </div>
+            <div class="user-profile">
+                <img src="https://placehold.co/40x40/FFF/333?text=U" alt="User Avatar">
+                <div class="user-info">
+                    <span class="user-name">Test User</span>
+                    <span class="user-email">user@email.com</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <header class="app-header">
+            <button id="menu-toggle-mobile" class="menu-toggle-btn">
+                <span></span><span></span><span></span>
+            </button>
+        </header>
+
+        <main class="content-area">
+            <div class="task-detail-card">
+                <div class="task-detail-header">
+                    <h1>Task Subject: Finalize Q3 Report</h1>
+                    <span class="task-status status-progress">In Progress</span>
+                </div>
+
+                <div class="task-layout">
+                    <div class="task-main-column">
+                        <div class="task-description">
+                            <h3>Task Description</h3>
+                            <p>Compile all departmental data, create visualizations for key metrics, and assemble the final slide deck for the quarterly review meeting.</p>
+                        </div>
+                        <div class="task-meta">
+                            <div class="meta-item"><strong>Assigned by:</strong><span>Alex Johnson</span></div>
+                            <div class="meta-item">
+                                <strong>Complete with:</strong>
+                                <div class="team-members">
+                                    <div class="team-member">
+                                        <img src="https://placehold.co/30x30/fee2e2/333?text=M" title="Maria">
+                                        <span>Maria Garcia</span>
+                                    </div>
+                                    <div class="team-member">
+                                        <img src="https://placehold.co/30x30/dcfce7/333?text=C" title="Chen">
+                                        <span>Chen Wei</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="meta-item"><strong>Deadline:</strong><span>Sep 15, 2025</span></div>
+                        </div>
+
+                        <div class="charts-section">
+                            <div class="progress-section">
+                            </div>
+                            <div class="contribution-section">
+                                <h3>Contribution Breakdown</h3>
+                                <div class="chart-wrapper">
+                                    <div class="contribution-chart task-chart-small"></div>
+                                    <ul class="chart-legend">
+                                        <li><span class="legend-swatch you"></span>You (50%)</li>
+                                        <li><span class="legend-swatch maria"></span>Maria Garcia (25%)</li>
+                                        <li><span class="legend-swatch chen"></span>Chen Wei (25%)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="task-breakdown">
+                            <div class="task-list"><h3>Your Tasks</h3><ul class="task-checklist"><li class="completed">Gather sales figures</li><li>Create revenue charts</li></ul></div>
+                            <div class="task-list"><h3>Team's Tasks</h3><ul class="task-checklist"><li class="completed">Collect marketing results (Maria)</li><li>Write executive summary (Chen)</li></ul></div>
+                        </div>
+                    </div>
+
+                    <div class="task-sidebar-column">
+                        <h3>Activity</h3>
+                        <div class="activity-feed">
+                            <div class="feed-item"><img src="https://placehold.co/30x30/fee2e2/333?text=M" alt="Maria"><p><strong>Maria Garcia</strong> marked a task as complete.<br><span class="feed-time">Yesterday at 4:30 PM</span></p></div>
+                            <div class="feed-item"><img src="https://placehold.co/30x30/FFF/333?text=U" alt="You"><p><strong>You</strong> marked a task as complete.<br><span class="feed-time">Yesterday at 11:15 AM</span></p></div>
+                             <div class="feed-item"><img src="https://placehold.co/30x30/dbeafe/333?text=A" alt="Alex"><p><strong>Alex Johnson</strong> commented: "Great progress!"<br><span class="feed-time">2 days ago</span></p></div>
+                        </div>
+                        <form class="comment-form">
+                            <textarea placeholder="Add a comment..."></textarea>
+                            <button type="submit" class="btn-primary">Comment</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="main.js" defer></script>
+</body>
+</html>

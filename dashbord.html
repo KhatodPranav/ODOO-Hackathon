@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SynergySphere</title>
+    <link rel="stylesheet" href="main.css">
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme') || 'dark';
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark-mode-preload');
+            }
+        })();
+    </script>
+</head>
+<body class="app-layout">
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">SynergySphere</div>
+            <button id="sidebar-toggle-desktop" class="sidebar-toggle">‹</button>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-link active">
+                <span class="nav-icon">📊</span> <span class="nav-text">Dashboard</span>
+            </a>
+            <a href="project.html" class="nav-link">
+                <span class="nav-icon">📁</span> <span class="nav-text">Projects</span>
+            </a>
+            <a href="#" class="nav-link">
+                <span class="nav-icon">✅</span> <span class="nav-text">Tasks</span>
+            </a>
+            <a href="#" class="nav-link notification-link" id="notification-link">
+                <span class="nav-icon">🔔</span> <span class="nav-text">Notifications</span>
+                <span class="notification-count">3</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+             <div class="theme-switch-wrapper">
+                <span class="theme-label" id="light-mode-label">Light</span>
+                <label class="theme-switch" for="theme-toggle"><input type="checkbox" id="theme-toggle" /><span class="slider"></span></label>
+                <span class="theme-label" id="dark-mode-label">Dark</span>
+            </div>
+            <div class="user-profile">
+                <img src="https://placehold.co/40x40/FFF/333?text=U" alt="User Avatar">
+                <div class="user-info">
+                    <span class="user-name">Test User</span>
+                    <span class="user-email">user@email.com</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <header class="app-header">
+            <button id="menu-toggle-mobile" class="menu-toggle-btn">
+                <span></span><span></span><span></span>
+            </button>
+        </header>
+
+        <main class="content-area">
+            <h1>Dashboard</h1>
+            
+            <nav class="dashboard-nav">
+                <a href="#" class="dashboard-tab" data-tab="points">Points</a>
+                <a href="#" class="dashboard-tab active" data-tab="tasks">Tasks Completed</a>
+                <a href="#" class="dashboard-tab" data-tab="friends">Friends</a>
+            </nav>
+
+            <div class="dashboard-content">
+                <div id="points-content" class="tab-pane">
+                    <div class="activity-card">
+                        <h3>My Point Activity</h3>
+                        <div class="activity-list">
+                            <div class="activity-item"><span>+1 Completed a daily check-in mission</span><span>Saturday, Sep 6, 2025, 12:59 PM</span></div>
+                            <div class="activity-item"><span>+10 Confirmed your email address</span><span>Tuesday, Jun 17, 2025, 12:53 AM</span></div>
+                            <div class="activity-item"><span>+5 Added a profile picture</span><span>Monday, Feb 3, 2025, 01:11 AM</span></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="tasks-content" class="tab-pane active">
+                    <div class="activity-card">
+                        <h3>Tasks Completed</h3>
+                        <div class="completed-tasks-list">
+                            <div class="task-item">
+                                <div class="task-info">
+                                    <div class="task-header">
+                                        <h4>Finalize Q3 Report</h4>
+                                        <span class="task-date">Completed: Sep 4, 2025</span>
+                                    </div>
+                                    <div class="task-details">
+                                        <p><strong>Completed with:</strong> Alex Johnson</p>
+                                        <p><strong>My Contribution:</strong> Compiled the final data and created the presentation slides.</p>
+                                    </div>
+                                </div>
+                                <div class="task-chart contribution-50"></div>
+                            </div>
+                            <div class="task-item">
+                                <div class="task-info">
+                                    <div class="task-header">
+                                        <h4>Deploy Website Redesign</h4>
+                                        <span class="task-date">Completed: Aug 28, 2025</span>
+                                    </div>
+                                    <div class="task-details">
+                                        <p><strong>Completed with:</strong> Maria Garcia, Chen Wei</p>
+                                        <p><strong>My Contribution:</strong> Performed final QA testing and managed the deployment process.</p>
+                                    </div>
+                                </div>
+                                <div class="task-chart contribution-33"></div>
+                            </div>
+                            <div class="task-item">
+                                <div class="task-info">
+                                    <div class="task-header">
+                                        <h4>User Feedback Analysis</h4>
+                                        <span class="task-date">Completed: Aug 15, 2025</span>
+                                    </div>
+                                    <div class="task-details">
+                                        <p><strong>Completed with:</strong> Fatima Al-Fassi</p>
+                                        <p><strong>My Contribution:</strong> Synthesized user interview notes into actionable insights.</p>
+                                    </div>
+                                </div>
+                                <div class="task-chart contribution-50"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="friends-content" class="tab-pane">
+                    <div class="friends-layout">
+                        <div class="friends-list">
+                            <h4>Contacts</h4>
+                            <ul>
+                                <li class="friend-item active"><div class="status-dot online"></div><span>Alex Johnson</span></li>
+                                <li class="friend-item"><div class="status-dot"></div><span>Maria Garcia</span></li>
+                                <li class="friend-item"><div class="status-dot online"></div><span>Chen Wei</span></li>
+                                <li class="friend-item"><div class="status-dot"></div><span>Fatima Al-Fassi</span></li>
+                            </ul>
+                        </div>
+                        <div class="chat-box">
+                            <div class="chat-header"><h5>Chat with Alex Johnson</h5></div>
+                            <div class="chat-messages">
+                                <div class="message received">Hey! Did you finish the design mockups?</div>
+                                <div class="message sent">Almost! Just putting the final touches on the dashboard page.</div>
+                                <div class="message received">Great, let me know when it's ready for review.</div>
+                            </div>
+                            <div class="chat-input">
+                                <input type="text" placeholder="Type a message..."><button class="btn-primary">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="main.js" defer></script>
+</body>
+</html>

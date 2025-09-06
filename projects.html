@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - SynergySphere</title>
+    <link rel="stylesheet" href="main.css">
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme') || 'dark';
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark-mode-preload');
+            }
+        })();
+    </script>
+</head>
+<body class="app-layout">
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">SynergySphere</div>
+            <button id="sidebar-toggle-desktop" class="sidebar-toggle">‹</button>
+        </div>
+        <div class="sidebar-search">
+            <input type="search" placeholder="Search...">
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-link">
+                <span class="nav-icon">📊</span> <span class="nav-text">Dashboard</span>
+            </a>
+            <a href="project.html" class="nav-link active">
+                <span class="nav-icon">📁</span> <span class="nav-text">Projects</span>
+            </a>
+            <a href="#" class="nav-link">
+                <span class="nav-icon">✅</span> <span class="nav-text">Tasks</span>
+            </a>
+            <a href="#" class="nav-link notification-link" id="notification-link">
+                <span class="nav-icon">🔔</span> <span class="nav-text">Notifications</span>
+                <span class="notification-count">3</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="theme-switch-wrapper">
+                <span class="theme-label" id="light-mode-label">Light</span>
+                <label class="theme-switch" for="theme-toggle"><input type="checkbox" id="theme-toggle" /><span class="slider"></span></label>
+                <span class="theme-label" id="dark-mode-label">Dark</span>
+            </div>
+            <div class="user-profile">
+                <img src="https://placehold.co/40x40/FFF/333?text=U" alt="User Avatar">
+                <div class="user-info">
+                    <span class="user-name">Test User</span>
+                    <span class="user-email">user@email.com</span>
+                </div>
+            </div>
+        </div>
+        <div id="notification-panel" class="dropdown-panel">
+            <div class="notification-item unread">New message from Alex.</div>
+            <div class="notification-item">Project deadline approaching.</div>
+            <div class="notification-item unread">Task "Review designs" is due.</div>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <header class="app-header">
+            <button id="menu-toggle-mobile" class="menu-toggle-btn">
+                <span></span><span></span><span></span>
+            </button>
+        </header>
+
+        <main class="content-area">
+            <div class="page-header">
+                <h1>Projects</h1>
+                <button class="btn-primary">+ New Project</button>
+            </div>
+            <section class="project-grid"></section>
+        </main>
+    </div>
+
+    <script src="main.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Project Card Rendering ---
+            const projectsData = [
+                { title: "RD Services", tags: [{ name: "Services", color: "#e0f2fe" }, { name: "Customer Care", color: "#fee2e2" }], imageUrl: "https://placehold.co/600x300/e0f2fe/333?text=RD+Services", deadline: "21/03/26", daysLeft: "D-18", managerAvatarUrl: "https://placehold.co/40x40/333/FFF?text=AV", taskCount: 12 },
+                { title: "Website Redesign", tags: [{ name: "UI/UX", color: "#dcfce7" }, { name: "Frontend", color: "#fae8ff" }], imageUrl: "https://placehold.co/600x300/dcfce7/333?text=Web+Redesign", deadline: "15/04/26", daysLeft: "D-40", managerAvatarUrl: "https://placehold.co/40x40/555/FFF?text=PM", taskCount: 35 },
+                { title: "API Integration", tags: [{ name: "Backend", color: "#fef3c7" }], imageUrl: "https://placehold.co/600x300/fef3c7/333?text=API", deadline: "30/01/26", daysLeft: "D-5", managerAvatarUrl: "https://placehold.co/40x40/777/FFF?text=JS", taskCount: 8 },
+                { title: "Q4 Marketing Plan", tags: [{ name: "Marketing", color: "#fae8ff" }], imageUrl: "https://placehold.co/600x300/fae8ff/333?text=Marketing", deadline: "10/05/26", daysLeft: "D-65", managerAvatarUrl: "https://placehold.co/40x40/999/FFF?text=KT", taskCount: 22 },
+                
+                // --- ADDED 3 NEW PROJECTS BELOW ---
+                { title: "Mobile App Relaunch", tags: [{ name: "Mobile", color: "#cffafe" }, { name: "Design", color: "#e0e7ff" }], imageUrl: "https://placehold.co/600x300/cffafe/333?text=Mobile+App", deadline: "25/06/26", daysLeft: "D-110", managerAvatarUrl: "https://placehold.co/40x40/111/FFF?text=SR", taskCount: 45 },
+                { title: "Cloud Migration", tags: [{ name: "Infrastructure", color: "#ffedd5" }, { name: "DevOps", color: "#fee2e2" }], imageUrl: "https://placehold.co/600x300/ffedd5/333?text=Cloud", deadline: "15/09/26", daysLeft: "D-192", managerAvatarUrl: "https://placehold.co/40x40/444/FFF?text=DB", taskCount: 28 }
+            ];
+
+            const projectGrid = document.querySelector('.project-grid');
+            function renderProjectCards() {
+                if (!projectGrid) return;
+                projectGrid.innerHTML = '';
+                projectsData.forEach(project => {
+                    const tagsHtml = project.tags.map(tag => `<span class="tag" style="background-color: ${tag.color};">${tag.name}</span>`).join('');
+                    projectGrid.innerHTML += `
+                        <div class="project-card">
+                            <div class="card-header"><div class="card-tags">${tagsHtml}</div><button class="options-btn">...</button></div>
+                            <h3 class="project-title">${project.title}</h3>
+                            <img src="${project.imageUrl}" alt="Project Image" class="project-image">
+                            <div class="card-footer">
+                                <div class="deadline"><span>🗓️ ${project.deadline}</span><span class="days-left">${project.daysLeft}</span></div>
+                                <div class="team-info"><img src="${project.managerAvatarUrl}" alt="Project Manager" class="manager-avatar"><span>📋 ${project.taskCount} Tasks</span></div>
+                            </div>
+                        </div>`;
+                });
+            }
+            renderProjectCards();
+
+            // --- Notification Panel Logic ---
+            const notificationLink = document.getElementById('notification-link');
+            const notificationPanel = document.getElementById('notification-panel');
+            if (notificationLink && notificationPanel) {
+                notificationLink.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    const rect = notificationLink.getBoundingClientRect();
+                    notificationPanel.style.top = `${rect.top}px`;
+                    notificationPanel.style.left = `${rect.right + 10}px`;
+                    notificationPanel.classList.toggle('show');
+                });
+                window.addEventListener('click', (event) => {
+                    if (!notificationPanel.contains(event.target) && !notificationLink.contains(event.target)) {
+                        notificationPanel.classList.remove('show');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
