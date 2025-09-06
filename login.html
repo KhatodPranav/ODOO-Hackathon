@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SynergySphere</title>
+    <link rel="stylesheet" href="main.css">
+    
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme') || 'light';
+            if (theme === 'dark') {
+                // We apply this class to the <html> tag for immediate effect
+                document.documentElement.classList.add('dark-mode-preload');
+            }
+        })();
+    </script>
+    
+    <style>
+        /* Ensures the footer stays at the bottom of the page */
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">SynergySphere</div>
+        <nav class="user-nav">
+            <a href="#" class="link-box">Home</a>
+            <a href="#" class="link-box">Solutions</a>
+            <a href="#" class="link-box">Features</a>
+            <a href="#" class="link-box">Sign Up</a>
+            
+            <div class="theme-switch-wrapper">
+    <span class="theme-label" id="light-mode-label">Light</span>
+    <label class="theme-switch" for="theme-toggle">
+        <input type="checkbox" id="theme-toggle" />
+        <span class="slider"></span>
+    </label>
+    <span class="theme-label" id="dark-mode-label">Dark</span>
+</div>
+        </nav>
+    </header>
+
+    <main class="login-page-container">
+        <div class="card login-card-custom">
+            <h2>Login to account</h2>
+            <p class="signup-prompt">
+                Don't have an account? <a href="#" class="text-link-button">Sign Up instead</a>
+            </p>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="login-submit-button">Login</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div>
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">Tasks</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Company</h4>
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Connect with us</h4>
+            <ul>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">LinkedIn</a></li>
+                <li><a href="#">Facebook</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="main.js" defer></script>
+    
+    <script>
+        // This is the page-specific script for handling the login form submission.
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('login-form');
+
+            loginForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                if (email && password) {
+                    console.log('Login attempt with:', { email, password });
+                    // For a prototype, redirect to the dashboard page
+                    window.location.href = 'dashboard.html';
+                } else if (window.showNotification) {
+                    window.showNotification('Please fill in all fields.', 'error');
+                } else {
+                    alert('Please fill in all fields.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
